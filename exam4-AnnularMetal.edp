@@ -1,6 +1,6 @@
 load "medit"
-border C1(t=0,2*pi) {x=42*cos(t);y=42*sin(t); label=1;}
-border C2(t=0,2*pi) {x=50*cos(t);y=50*sin(t); label=2;}
+border C1(t=0,2*pi) {x=0.42*cos(t);y=0.42*sin(t); label=1;}
+border C2(t=0,2*pi) {x=0.5*cos(t);y=0.5*sin(t); label=2;}
 int n=100;
 mesh Th = buildmesh(C1(-n)+C2(2*n));
 plot(Th);
@@ -12,9 +12,9 @@ macro div(u,v) ( dx(u)+dy(v) ) //
 
 real E = 200e3, nu= 0.3, mu= E/(2*(1+nu));
 real lambda = E*nu/((1+nu)*(1-2*nu));
-real t=0, dt =0.01;
-func f1 = 1000*x*t;
-func f2 = 1000*y*t;
+real t=0, dt =0.25;
+func f1 = 10000*x*t;
+func f2 = 10000*y*t;
 //func g  = -9.81;
 problem lame([u,v],[uu,vv])= 
 	int2d(Th)(
@@ -27,8 +27,8 @@ for (int i=0;i<100;i++)
 {
 	t+=dt;
 	lame;
-	mesh th1 = movemesh(Th, [x+u, y+v]);
-	plot(th1);
-//	savemesh(th1,"Annu."+i+".mesh");
-//	savesol("Annu."+i+".sol",th1,[u,v]);
+	mesh Th = movemesh(Th, [x+u, y+v]);
+	plot(Th);
+//	savemesh(Th,"Annu."+i+".mesh");
+//	savesol("Annu."+i+".sol",Th,[u,v]);
 }

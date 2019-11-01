@@ -32,7 +32,7 @@ macro div(u,v) ( dx(u)+dy(v) ) //
 
 real E = 70000, nu = 0.3, mu= E/(2*(1+nu));
 real lambda = E*nu/((1+nu)*(1-2*nu));
-func f = 10000*t; 
+func f = 10000*t;
 func g = -9.81;
 
 
@@ -46,7 +46,6 @@ for (int i=0;i<100;i++)
 {
 	t+=dt;
 	lame;
-	mesh th1 = movemesh(Th, [x+u, y+v]);
-	plot(th1);
-	//savemesh(th1,);
+	mesh Th = movemesh(Th, [x+u, y+v]);
+	plot(Th);
 }

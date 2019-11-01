@@ -1,7 +1,7 @@
 border a1(t=0,2){x=2;y=t;label=3;}
 border a2(t=0,2){x=t;y=0;label=1;}
 border a3(t=0,2){x=2-t;y=2;label=2;}
-border a4(t=0,2){x=0;y=2-t;label=3;} 
+border a4(t=0,2){x=0;y=2-t;label=3;}
 
 border a5(t=0,2*pi){x=0.3*cos(t)+1; y=0.5*sin(t)+1; label=3;}
 border a6(t=0,2*pi){x=(0.5+0.2*sin(5*t))*cos(t)+1; y=(0.5+0.2*sin(5*t))*sin(t)+1; label=3;}

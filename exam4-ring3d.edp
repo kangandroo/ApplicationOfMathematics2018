@@ -1,22 +1,22 @@
-load "medit" 
+load "medit"
 load "msh3"
 
 int n=4;
 
 border a1(t=0,1){x=4;y=t;label=1;}
 border a2(t=0,4){x=t;y=0;label=45;} // biên trong
-border a3(t=0,4){x=4-t;y=1;label=99;} // biên ngoài 
-border a4(t=0,1){x=0;y=1-t;label=1;} 
+border a3(t=0,4){x=4-t;y=1;label=99;} // biên ngoài
+border a4(t=0,1){x=0;y=1-t;label=1;}
 
 mesh Thx = buildmesh(a1(n)+a2(4*n)+a3(4*n)+a4(n));
 plot(Thx,wait=1);
-int reg0 = Thx(0,0).region;// get the region number on 2 mesh . 
+int reg0 = Thx(0,0).region;// get the region number on 2 mesh .
 // label 1-> 1 mid.
 int[int] lmid=[1,1 ]; // //2d label      1 become  label 2
-mesh3 Th=buildlayers(Thx,20*4, zbound=[0,5*4], 
-      labelmid=lmid,
-      transfo=[x,(4+y)*cos(z*pi/10),(4+y)*sin(z*pi/10)],
-      facemerge=1);// to remove the commun face up dawn 
+mesh3 Th=buildlayers(Thx,20*4, zbound=[0,5*4],
+	labelmid=lmid,
+	transfo=[x,(4+y)*cos(z*pi/10),(4+y)*sin(z*pi/10)],
+	facemerge=1);// to remove the commun face up dawn
 //plot(Th);
 
 fespace Vh(Th,[P1,P1,P1]);
@@ -26,13 +26,13 @@ macro epsilon(u1,u2,u3) [dx(u1),dy(u2),dz(u3),(dz(u2)+dy(u3))/sqrt2,
 (dz(u1)+dx(u3))/sqrt2,(dy(u1)+dx(u2))/sqrt2] // EOM
 macro div(u1,u2,u3) ( dx(u1)+dy(u2)+dz(u3) ) // EOM
 
-real E = 2e5, nu = 0.3, mu= E/(2*(1+nu)); 
+real E = 2e5, nu = 0.3, mu= E/(2*(1+nu));
 real lambda = E*nu/((1+nu)*(1-2*nu));
 real t=0,dt=0.1;
 real f = 80;
-func f1 = f*t*x; 
-func f2 = f*t*y; 
-func f3 = f*t*z;     
+func f1 = f*t*x;
+func f2 = f*t*y;
+func f3 = f*t*z;
 
 for (int i=0;i<36;i++)
 {
@@ -60,4 +60,4 @@ for (int i=0;i<36;i++)
 	savesol("luc3d."+i+".sol",Thm,[u1,u2,u3]);
 	//medit("th",Thm);
 	plot(Thm);
-} 
+}

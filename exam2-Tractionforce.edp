@@ -18,7 +18,7 @@ fespace Vh(Th,P2);
 Vh u,v,uu,vv;
 real sqrt2=sqrt(2.);
 real dt=0.01, t=0;
-macro epsilon(u1,u2) [dx(u1),dy(u2),(dy(u1)+dx(u2))/sqrt2] //
+macro epsilon(u1,u2) [dx(u1),dy(u2),(dy(u1)+dx(u2))/sqrt2]
 macro div(u,v) ( dx(u)+dy(v) ) //
 
 real E = 70000, nu = 0.3, mu= E/(2*(1+nu));
@@ -37,6 +37,6 @@ for (int i=0;i<100;i++)
 {
 	t+=dt;
 	lame;
-	mesh th1 = movemesh(Th, [x+u, y+v]);
-	plot(th1);
+	mesh Th = movemesh(Th, [x+u, y+v]);
+	plot(Th);
 }
